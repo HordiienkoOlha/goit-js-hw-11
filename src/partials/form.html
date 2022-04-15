@@ -1,14 +1,35 @@
-<div class="form-group col-md-4 d-inline-flex justify-content-center">
-  <input
-    type="text"
-    class="form-control"
-    name="name"
-    autocomplete="off"
-    placeholder="Search country..."
-    id="search-box"
-    required
-  />
-  <button type="submit" class="btn btn-light btn-sm rounded border">
+<section class="container-form">
+
+<!-- <div class="search-form d-flex p-3 justify-content-cente" id="search-form"> -->
+    <!-- <input
+      type="text"
+      class="form-control"
+      name="searchQuery"
+      autocomplete="off"
+      placeholder="Search images..."
+      id="search-box"
+      required
+    /> -->
+    <!-- <button type="submit" class="btn btn-outline-primary rounded">
     <span class="material-icons-outlined align-bottom">search</span>
-  </button>
-</div>
+  </button> -->
+  <!-- </div> -->
+  <div class="input-group  search-form d-flex p-3 justify-content-center" id="search-form">
+    <input
+      type="text"
+      class="form-control input-js"
+      name="searchQuery"
+      autocomplete="off"
+      placeholder="Search images..."
+      id="search-box"
+      required
+    />
+    <button type="submit" class="btn btn-secondary input-group-text">
+      <span class="material-icons-outlined align-bottom">search</span>
+    </button>
+  </div>
+</section>
+<!-- <form class="search-form" id="search-form">
+  <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+  <button type="submit">Search</button>
+</form> -->
