@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import 'material-icons/iconfont/material-icons.css';
 // const bootstrap = require('bootstrap');
 // import bootstrap from 'bootstrap';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
