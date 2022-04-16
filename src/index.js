@@ -1,6 +1,6 @@
 import './sass/main.scss';
 import 'material-icons/iconfont/material-icons.css';
-import axios from 'axios';
+
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // Notify.success('Sol lucet omnibus');
 // Notify.failure('Qui timide rogat docet negare');
@@ -12,18 +12,22 @@ import axios from 'axios';
 // image_type - тип зображення. На потрібні тільки фотографії, тому постав значення photo.
 // orientation - орієнтація фотографії. Постав значення horizontal.
 // safesearch - фільтр за віком. Постав значення true.
-const API_KEY = '26797371-301fbf489e1e7afb05e25635e';
-const BASE_URL = 'https://pixabay.com/api/';
+
 import { getRefs } from './helpers/getRefs';
+import { ImageService } from './helpers/api-service';
 const { formRef, inputRef, btnSearchRef, btnLoadMoreRef } = getRefs();
-axios.defaults.baseURL = BASE_URL;
-axios.defaults.headers.common['Authorization'] = API_KEY;
+
 formRef.addEventListener('submit', onSearchSubmit);
 function onSearchSubmit(event) {
     event.preventDefault();
     // newsApiService.query = event.currentTarget.elements.query.value.trim();
     
-    const inputText= event.currentTarget.elements.query.value.trim();
-    console.dir(inputText)
+    const query= event.currentTarget.elements.query.value.trim();
+    console.dir(query)
 }
-// console.dir(onSearchSubmit)
+// const getContacts = async () => {
+//   const { data } = await axios.get('/images');
+//     console.log(data)
+//   return data;
+// };
+// axios.get(url[, config])
