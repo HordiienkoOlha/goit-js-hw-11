@@ -4,5 +4,6 @@ export const getRefs = () => {
         inputRef: document.querySelector('.js-input'),
         btnSearchRef: document.querySelector('.js-search-btn'),
         btnLoadMoreRef: document.querySelector('.js-btn-load-more'),
+        galleryContainer: document.querySelector('.gallery'),
     };
 };

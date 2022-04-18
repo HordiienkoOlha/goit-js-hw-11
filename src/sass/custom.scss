@@ -9,6 +9,11 @@ background: linear-gradient(to right, #FFFFFF, #ECE9E6);
 header {
     background-color: #74ebd5;
 }
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 .js-input {
     max-width: 300px;
 }

@@ -8,7 +8,7 @@ axios.defaults.baseURL = BASE_URL;
 export const searchPhoto = () => {
     return axios
       .get(
-          `/?key=${API_KEY}=cat&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=40`,
+          `/?key=${API_KEY}&q=cat&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=40`,
         
       )
 }
