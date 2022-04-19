@@ -13,9 +13,10 @@ export const PhotoService = {
   incrementPage() {
     this.page += 1;
   },
-
+  
   resetPage() {
     this.page = 1;
+    
   },
 
     searchPhoto() {
@@ -23,7 +24,8 @@ export const PhotoService = {
       .get(
         `/?key=${API_KEY}&q=${this._query}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`,
       )
-        .then(response => {
+      .then(response => {
+          
           console.log(response.data)
         this.incrementPage();
 
@@ -31,6 +33,7 @@ export const PhotoService = {
             console.log(hits)
         return {
           hits,
+          totalHits,
           isOver: totalHits >= this.page * this.perPage,
         };
       });

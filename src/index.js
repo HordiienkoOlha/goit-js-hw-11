@@ -1,9 +1,11 @@
 import './sass/main.scss';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+// import 'simplelightbox/dist/simple-lightbox.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import { PhotoService } from './helpers/api-service';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-// import SimpleLightbox from 'simplelightbox';
+// import SimpleLightbox from "simple-lightbox.js";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 import { getRefs } from './helpers/getRefs';
 import { LoadMoreBtn } from './helpers/loadMoreBtn';
@@ -30,13 +32,18 @@ function onSearchSubmit(event) {
   //     // newsApiService.query = event.currentTarget.elements.query.value.trim();
 
   PhotoService.inputQuery = event.currentTarget.elements.query.value.trim();
-//   console.log(inputQuery);
-  if (!PhotoService.inputQuery) return Notify.failure('Please enter a search query');
+  //   console.log(inputQuery);
+  //   if (!PhotoService.inputQuery) return Notify.failure('Please enter a search query');
 
   onLoadImages()
     .then(() => {
       loadMoreBtn.show();
-    //   Notify.success('Find photo');
+      // Notify.success('Find photo');
+      // if (!PhotoService.inputQuery) {
+      //     Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+
+      // }
+      // Notify.success('Find photo');
     })
     .catch(err => {
       Notify.failure('Error');
@@ -46,26 +53,29 @@ function onSearchSubmit(event) {
   formRef.reset();
 }
 
-
 function onLoadImages() {
-  return PhotoService.searchPhoto().then(({ hits, isOver }) => {
+  return PhotoService.searchPhoto().then(({ hits, totalHits, isOver }) => {
     console.log(hits);
     if (!isOver) {
       loadMoreBtn.hide();
-      Notify.failure('No more images to load');
+      Notify.failure(`We're sorry, but you've reached the end of search results.`);
       return;
-    }
+      }
+      
+    const notifyFindPhotos = !PhotoService.inputQuery
+      ? Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+      : Notify.success(`Hooray! We found ${totalHits} images.`);
 
-    if (!hits.length) return Notify.failure('No images found');
+    // if (!hits.length) return Notify.failure('No images found');
 
     renderList(hits);
   });
 }
-// let gallery = new SimpleLightbox('.gallery a', {
-//   captions: true,
-//   captionsData: 'alt',
-//   captionDelay: 250,
-// });
+let gallery = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 // gallery.on('show.simplelightbox', function () {
 // 	console.log('simplelightbox')
 // });
