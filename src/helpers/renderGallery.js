@@ -1,44 +1,38 @@
-// webformatURL - посилання на маленьке зображення для списку карток.
-// largeImageURL - посилання на велике зображення.
-// import { getRefs } from './getRefs';
-// const { galleryContainer } = getRefs();
-// console.log(galleryContainer);
-// export
-//     const renderList = images => {
-//   galleryContainer.innerHTML = '';
-//   const markup = images
-//     .map(
-//       ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
-//     <li class="gallery-card">
-//         <a class="gallery-item" href="${largeImageURL}">
-//         <img class="gallery-image" src="${webformatURL}" alt="${tags}" loading="lazy""/></a>
-//         <ul class="info">
-//             <li class="info-item"><p class="info-text">
-//                 <b>Likes</b>${likes}
-//                 </p>
-//             </li>
-//             <li class="info-item"><p class="info-text">
-//                 <b>Views</b>${views}
-//                 </p>
-//             </li>
-//             <li class="info-item"><p class="info-text">
-//                 <b>Comments</b>${comments}
-//                 </p>
-//             </li>
-//             <li class="info-item"><p class="info-text">
-//                 <b>Downloads</b>${downloads}
-//                 </p>
-//             </li>
-//         </ul>
-//     </li>`,
-//     )
-//         .join('');
-//     galleryContainer.insertAdjacentHTML('beforeend', markup);
-// };
 
+import { getRefs } from './getRefs';
+const { galleryContainer } = getRefs();
 
-// let gallery = new SimpleLightbox('.gallery a', {
-//     captions: true,
-//     captionsData: 'alt',
-//     captionDelay: 250,
-// });
+export const renderList = images => {
+  console.log(images);
+  galleryContainer.innerHTML = '';
+  const markup = images
+    .map(
+      ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
+    <div class="card col-xl-3 col-lg-4 col-md-6 mb-4">
+    
+        <a class="gallery-item" href="${largeImageURL}">
+        <img class="gallery-image img-fluid pt-2" src="${webformatURL}" alt="${tags}" loading="lazy""/></a>
+        <ul class="info card-body d-flex flex-wrap navbar ">
+            <li class="info-item"><p class="info-text card-text">
+                <b>Likes</b><br>${likes}
+                </p>
+            </li>
+            <li class="info-item"><p class="info-text card-text">
+                <b>Views</b><br>${views}
+                </p>
+            </li>
+            <li class="info-item"><p class="info-text card-text">
+                <b>Comments</b><br>${comments}
+                </p>
+            </li>
+            <li class="info-item"><p class="info-text card-text">
+                <b>Downloads</b><br>${downloads}
+                </p>
+            </li>
+        </ul>
+    </div>
+`,
+    )
+    .join('');
+  galleryContainer.insertAdjacentHTML('beforeend', markup);
+};
