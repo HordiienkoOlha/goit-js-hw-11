@@ -1,10 +1,9 @@
 import './sass/main.scss';
 import 'material-icons/iconfont/material-icons.css';
-import "simplelightbox/dist/simple-lightbox.min.css";
-
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import SimpleLightbox from "simplelightbox";
+import SimpleLightbox from 'simplelightbox';
 
 import { PhotoService } from './helpers/api-service';
 import { getRefs } from './helpers/getRefs';
@@ -29,26 +28,23 @@ formRef.addEventListener('submit', onSearchSubmit);
 
 function onSearchSubmit(event) {
   event.preventDefault();
-  //     // newsApiService.query = event.currentTarget.elements.query.value.trim();
 
+  galleryContainer.innerHTML = '';
+  
+  PhotoService.resetPage();
+  
   PhotoService.inputQuery = event.currentTarget.elements.query.value.trim();
   //   console.log(inputQuery);
-    if (PhotoService.inputQuery === '') return Notify.failure('Please enter a search query');
-
+  if (PhotoService.inputQuery === '') return Notify.failure('Please enter a search query');
+  
   onLoadImages()
-    .then(() => {
-      loadMoreBtn.show();
-      // Notify.success('Find photo');
-      // if (!PhotoService.inputQuery) {
-      //     Notify.failure('Sorry, there are no images matching your search query. Please try again.')
-
-      // }
-      // Notify.success('Find photo');
-    })
-    .catch(err => {
-      Notify.failure('Error');
-      console.error(err);
-    });
+    // .then(() => {
+    //   loadMoreBtn.show();
+    // })
+    // .catch(err => {
+    //   Notify.failure('Error');
+    //   console.error(err);
+    // });
 
   formRef.reset();
 }
@@ -56,18 +52,27 @@ function onSearchSubmit(event) {
 function onLoadImages() {
   return PhotoService.searchPhoto().then(({ hits, totalHits, isOver }) => {
     console.log(hits);
-        const notifyFindPhotos = !hits.length
-      ? Notify.failure('Sorry, there are no images matching your search query. Please try again.')
-      : Notify.success(`Hooray! We found ${totalHits} images.`);
-    if (!isOver) {
-      loadMoreBtn.hide();
-        
-      return;
+    //   const notifyFindPhotos = !hits.length
+    // ? Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+    // : Notify.success(`Hooray! We found ${totalHits} images.`);
+    // if (!isOver) {
+    //   loadMoreBtn.hide();
+    //     Notify.info(`We're sorry, but you've reached the end of search results.`);
+    //   return;
+    //   }
+    if (!hits.length) {
+      Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+      // loadMoreBtn.hide();
+      // return;
+    } else {
+      if (!isOver) {
+        loadMoreBtn.hide();
+        Notify.info(`We're sorry, but you've reached the end of search results.`);
+        return;
       }
-      
-
-
-    // if (!hits.length) return Notify.failure('No images found');
+      Notify.success(`Hooray! We found ${totalHits} images.`);
+      loadMoreBtn.show();
+    }
 
     renderList(hits);
   });
