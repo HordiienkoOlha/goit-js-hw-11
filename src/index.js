@@ -77,11 +77,11 @@ function onLoadImages() {
     renderList(hits);
   });
 }
-let lightbox = new SimpleLightbox('.gallery a', {
-  captions: true,
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+// let lightbox = new SimpleLightbox('.gallery a', {
+//   captions: true,
+//   captionsData: 'alt',
+//   captionDelay: 250,
+// });
 // gallery.on('show.simplelightbox', function () {
 // 	console.log('simplelightbox')
 // });

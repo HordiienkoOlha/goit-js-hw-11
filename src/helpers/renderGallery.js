@@ -35,4 +35,8 @@ export const renderList = images => {
     )
     .join('');
   galleryContainer.insertAdjacentHTML('beforeend', markup);
+  let lightbox = new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionDelay: 250,
+});
 };
