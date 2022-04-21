@@ -1,10 +1,7 @@
-
 import { getRefs } from './getRefs';
 const { galleryContainer } = getRefs();
 
 export const renderList = images => {
-  console.log(images);
-//   galleryContainer.innerHTML = '';
   const markup = images
     .map(
       ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `

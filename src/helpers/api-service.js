@@ -6,31 +6,28 @@ const BASE_URL = 'https://pixabay.com/api';
 axios.defaults.baseURL = BASE_URL;
 
 export const PhotoService = {
-  _query: '',
+  searchQuery: '',
   page: 1,
   perPage: 40,
 
   incrementPage() {
     this.page += 1;
   },
-    
+
   resetPage() {
     this.page = 1;
-    
   },
 
-    searchPhoto() {
+  searchPhoto() {
     return axios
       .get(
-        `/?key=${API_KEY}&q=${this._query}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`,
+        `/?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`,
       )
       .then(response => {
-          
-          console.log(response.data)
         this.incrementPage();
 
         const { hits, totalHits } = response.data;
-            console.log(hits)
+        console.log(hits);
         return {
           hits,
           totalHits,
@@ -39,11 +36,11 @@ export const PhotoService = {
       });
   },
 
-    get inputQuery() {
-    return this._query;
+  get inputQuery() {
+    return this.searchQuery;
   },
 
   set inputQuery(newQuery) {
-    this._query = newQuery;
+    this.searchQuery = newQuery;
   },
 };
