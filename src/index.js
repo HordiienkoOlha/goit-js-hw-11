@@ -43,7 +43,6 @@ function onSearchSubmit(event) {
 
 function onLoadImages() {
   return PhotoService.searchPhoto().then(({ hits, totalHits, isOver }) => {
-
     if (!hits.length) {
       Notify.failure('Sorry, there are no images matching your search query. Please try again.');
     } else {
@@ -57,5 +56,11 @@ function onLoadImages() {
     }
 
     renderList(hits);
+    const { height: cardHeight } = document.querySelector('.gallery').getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 1,
+      behavior: 'smooth',
+    });
   });
 }
