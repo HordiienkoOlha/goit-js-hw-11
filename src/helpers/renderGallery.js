@@ -38,5 +38,6 @@ export const renderList = images => {
   let lightbox = new SimpleLightbox('.gallery a', {
     captions: true,
     captionDelay: 250,
-});
+  });
+  lightbox.refresh()
 };
