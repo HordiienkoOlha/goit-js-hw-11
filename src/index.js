@@ -1,12 +1,12 @@
 import './sass/main.scss';
-// import 'simplelightbox/dist/simple-lightbox.min.css';
 import 'material-icons/iconfont/material-icons.css';
-import { PhotoService } from './helpers/api-service';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-// import SimpleLightbox from "simple-lightbox.js";
-// Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import SimpleLightbox from "simplelightbox";
+
+import { PhotoService } from './helpers/api-service';
 import { getRefs } from './helpers/getRefs';
 import { LoadMoreBtn } from './helpers/loadMoreBtn';
 import { renderList } from './helpers/renderGallery';
@@ -33,7 +33,7 @@ function onSearchSubmit(event) {
 
   PhotoService.inputQuery = event.currentTarget.elements.query.value.trim();
   //   console.log(inputQuery);
-  //   if (!PhotoService.inputQuery) return Notify.failure('Please enter a search query');
+    if (PhotoService.inputQuery === '') return Notify.failure('Please enter a search query');
 
   onLoadImages()
     .then(() => {
@@ -56,22 +56,23 @@ function onSearchSubmit(event) {
 function onLoadImages() {
   return PhotoService.searchPhoto().then(({ hits, totalHits, isOver }) => {
     console.log(hits);
+        const notifyFindPhotos = !hits.length
+      ? Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+      : Notify.success(`Hooray! We found ${totalHits} images.`);
     if (!isOver) {
       loadMoreBtn.hide();
-      Notify.failure(`We're sorry, but you've reached the end of search results.`);
+        
       return;
       }
       
-    const notifyFindPhotos = !PhotoService.inputQuery
-      ? Notify.failure('Sorry, there are no images matching your search query. Please try again.')
-      : Notify.success(`Hooray! We found ${totalHits} images.`);
+
 
     // if (!hits.length) return Notify.failure('No images found');
 
     renderList(hits);
   });
 }
-let gallery = new SimpleLightbox('.gallery a', {
+let lightbox = new SimpleLightbox('.gallery a', {
   captions: true,
   captionsData: 'alt',
   captionDelay: 250,

@@ -11,7 +11,7 @@ export const renderList = images => {
     <div class="card col-xl-3 col-lg-4 col-md-6 mb-4">
     
         <a class="gallery-item" href="${largeImageURL}">
-        <img class="gallery-image img-fluid pt-2" src="${webformatURL}" alt="${tags}" loading="lazy""/></a>
+        <img class="gallery-image img-fluid pt-2" src="${webformatURL}" alt="${tags}""/></a>
         <ul class="info card-body d-flex flex-wrap navbar ">
             <li class="info-item"><p class="info-text card-text">
                 <b>Likes</b><br>${likes}
