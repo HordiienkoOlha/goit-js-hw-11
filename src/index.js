@@ -30,7 +30,7 @@ function onSearchSubmit(event) {
   event.preventDefault();
 
   galleryContainer.innerHTML = '';
-
+  loadMoreBtn.hide();
   PhotoService.resetPage();
 
   PhotoService.inputQuery = event.currentTarget.elements.query.value.trim();
